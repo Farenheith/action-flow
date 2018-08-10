@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('flanswers-flow App', () => {
+describe('action-flow App', () => {
   let page: AppPage;
 
   beforeEach(() => {
