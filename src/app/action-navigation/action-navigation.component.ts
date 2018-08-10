@@ -56,7 +56,7 @@ export class ActionNavigationComponent implements OnInit {
           label: title,
           value: title,
           description: data.description
-        });
+        })
       });
     });
   }

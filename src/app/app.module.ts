@@ -9,12 +9,14 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ActionNavigationComponent } from './action-navigation/action-navigation.component';
 import { environment } from '../environments/environment';
+import { DefaultPageComponent } from './default-page/default-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActionNavigationComponent
+    ActionNavigationComponent,
+    DefaultPageComponent
   ],
   imports: [
     BrowserModule,
