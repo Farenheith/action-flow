@@ -1,0 +1,27 @@
+<thf-page-default>
+  <thf-table
+    [t-columns]="[{ column: 'value', label: 'Histórico' }]"
+    [t-items]="history">
+  </thf-table>
+  <thf-info
+    [t-value]="description">
+  </thf-info>
+  <form #selectForm="ngForm">
+    <thf-radio-group
+      name="nextAction"
+      t-label="Próxima ação"
+      t-placeholder="Selecione uma ação"
+      (t-change)="onChangeAction($event)"
+      [(ngModel)]="selectedAction"
+      [t-options]="next"
+      t-sort>
+    </thf-radio-group>
+  </form>
+  <thf-button
+  t-label="Selecionar ação"
+  (t-click)="onSelectAction()">
+</thf-button>
+<br>
+<br>
+<br>
+</thf-page-default>
