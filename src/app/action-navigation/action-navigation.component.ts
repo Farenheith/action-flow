@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
-import { AngularFirestore, DocumentReference, DocumentSnapshot } from '../../../node_modules/angularfire2/firestore';
-import { FlaNextActions } from '../../models/fla-next-actions';
-import { FlaAction } from '../../models/fla-action';
-import { FlaHistory } from '../../models/fla-history';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DataBaseService } from '../../services/database-service';
+import { FlowAction } from '../../models/flow-action';
+import { MainAction } from '../../models/main-action';
 
 @Component({
   selector: 'app-action-navigation',
@@ -13,15 +12,12 @@ import { FlaHistory } from '../../models/fla-history';
 export class ActionNavigationComponent implements OnInit {
 
   description: string;
-  next: Array<FlaNextActions> = [];
-  history: Array<FlaHistory> = [];
-  reference: { [id: string]: DocumentReference };
+  next: Array<{label: string, description: string, value: string}> = [];
+  history: Array<{ value: string }> = [];
   selectedAction: string;
+  mainAction: MainAction;
 
-  constructor(private router: Router, private db: AngularFirestore, private route: ActivatedRoute)
-  {
-
-  }
+  constructor(private router: Router, private db: DataBaseService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(queryParams => {
@@ -29,8 +25,8 @@ export class ActionNavigationComponent implements OnInit {
         this.history.pop();
       }
       this.selectedAction = null;
-      const doc = this.db.collection("initial").doc(queryParams.id);
-      doc.valueChanges().subscribe((x: any) => {
+      const doc = this.db.getAction(queryParams.id, x => {
+        this.mainAction = x;
         this.history.push({
           value: this.getName(x)
         });
@@ -41,32 +37,30 @@ export class ActionNavigationComponent implements OnInit {
     );
   }
 
-  private fillNextActions(x: any) {
+  private fillNextActions(x: FlowAction) {
+    const _this = this;
     this.selectedAction = null;
     while (this.next.length > 0) {
       this.next.pop();
     }
-    this.reference = {};
-    x.next.forEach((y: DocumentReference) => {
-      y.get().then((z: DocumentSnapshot<FlaAction>) => {
-        const data = z.data();
-        const title = this.getTitle(data);
-        this.reference[title] = y;
-        this.next.push({
+    x.next.forEach(y => {
+      _this.mainAction.getSubAction(y, data => {
+        const title = _this.getTitle(data);
+        _this.next.push({
           label: title,
-          value: title,
+          value: y,
           description: data.description
-        })
+        });
       });
     });
   }
 
-  private getTitle(data: FlaAction) {
-    return '[' + data.type.id + '] ' + data.title;
+  private getTitle(data: FlowAction) {
+    return '[' + data.type + '] ' + data.title;
   }
 
-  private getName(data: FlaAction) {
-    return '[' + data.type.id + '] ' + data.name;
+  private getName(data: FlowAction) {
+    return '[' + data.type + '] ' + data.name;
   }
 
   onSelectAction() {
@@ -74,16 +68,16 @@ export class ActionNavigationComponent implements OnInit {
       alert('Nenhuma ação selecionada!');
     } else {
       this.next.forEach(x => {
-        if (x.value === this.selectedAction){
+        if (x.value === this.selectedAction) {
           this.description = x.description;
         }
       });
-      this.reference[this.selectedAction].get().then((x: DocumentSnapshot<FlaAction>) => {
-        const data = x.data();
-        this.history.push({
-          value: this.getName(data)
+      const _me = this;
+      this.mainAction.getSubAction(this.selectedAction, data => {
+        _me.history.push({
+          value: _me.getName(data)
         });
-        this.fillNextActions(data);
+        _me.fillNextActions(data);
       });
     }
   }
@@ -99,5 +93,4 @@ export class ActionNavigationComponent implements OnInit {
       });
     }
   }
-
 }
