@@ -10,13 +10,14 @@ import { DataBaseService } from '../services/database-service';
   providers: [DataBaseService]
 })
 export class AppComponent {
-  title = 'app';
+  title = 'ACTION FLOW';
   menus = [
     { label: 'Teste', action: this.callActions },
   ];
 
   constructor(private router: Router, private db: DataBaseService) {
     db.getInitialActions(x => {
+      this.title = x.title;
       while (this.menus.length > 0) {
         this.menus.pop();
       }
