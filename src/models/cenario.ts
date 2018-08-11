@@ -1,7 +1,7 @@
-import { ActionMenu } from './action-menu';
+import { ItemMenu } from './item-menu';
 
 export class Cenario {
     title: string;
     description: string;
-    initialActions: Array<ActionMenu>;
+    initialActions: Array<ItemMenu>;
 }

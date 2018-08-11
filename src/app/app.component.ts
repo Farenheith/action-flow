@@ -2,40 +2,37 @@ import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 import { DataBaseService } from '../services/database-service';
+import { AuthGuard } from './authentication/auth-guard';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [DataBaseService]
+  providers: [DataBaseService, AuthGuard]
 })
 export class AppComponent {
   title = 'ACTION FLOW';
-  menus = [
-    { label: 'Teste', action: this.callActions },
-  ];
+  menus = new Array<{ label: string, action: () => void }>();
 
   constructor(private router: Router, private db: DataBaseService) {
-    db.getInitialActions(x => {
+    db.subscribeInitialActions(x => {
       this.title = x.title;
-      while (this.menus.length > 0) {
-        this.menus.pop();
-      }
+      this.menus.length = 0;
       x.initialActions.forEach(y => {
         this.menus.push({
           label: y.title,
-          action: () => { this.callActions(y.action); }
+          action: () => { this.callActions(y.id); }
         });
       });
-    })
+    });
   }
 
-  callActions(doc: string){
+  callActions(doc: string) {
     this.router.navigate(['/actions'], {
       queryParams: {
         id: doc
       }
-    })
+    });
  }
 
 }

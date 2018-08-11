@@ -1,3 +1,20 @@
-<p>
-  default-page works!
-</p>
+<thf-page-default>
+  <form #cenarioForm="ngForm">
+    <thf-combo
+      name="selectedOption"
+      t-label="Selecione o cenário de trabalho"
+      t-placeholder="Selecione um cenário"
+      [t-options]="cenarios"
+      [(ngModel)]="selected"
+      (t-change)="onChange($event)">
+    </thf-combo>
+  </form>
+  <thf-info
+    t-label="Cenário selecionado"
+    [t-value]="selected">
+  </thf-info>
+  <thf-info
+    t-label="Descrição"
+    [t-value]="description">
+  </thf-info>
+</thf-page-default>
