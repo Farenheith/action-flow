@@ -12,8 +12,8 @@ import { MainAction } from '../../models/main-action';
 export class ActionNavigationComponent implements OnInit {
 
   description: string;
-  next: Array<{label: string, description: string, value: string}> = [];
-  history: Array<{ value: string }> = [];
+  next = new Array<{label: string, description: string, value: string}>();
+  history = new Array<{ value: string }>();
   selectedAction: string;
   mainAction: MainAction;
 
@@ -21,11 +21,9 @@ export class ActionNavigationComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(queryParams => {
-      while (this.history.length > 0) {
-        this.history.pop();
-      }
+      this.history.length = 0;
       this.selectedAction = null;
-      const doc = this.db.getAction(queryParams.id, x => {
+      const doc = this.db.subscribeAction(queryParams.id, x => {
         this.mainAction = x;
         this.history.push({
           value: this.getName(x)
@@ -40,9 +38,7 @@ export class ActionNavigationComponent implements OnInit {
   private fillNextActions(x: FlowAction) {
     const _this = this;
     this.selectedAction = null;
-    while (this.next.length > 0) {
-      this.next.pop();
-    }
+    this.next.length = 0;
     x.next.forEach(y => {
       _this.mainAction.getSubAction(y, data => {
         const title = _this.getTitle(data);
