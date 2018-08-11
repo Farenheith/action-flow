@@ -1,27 +1,30 @@
 import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Router } from '../../node_modules/@angular/router';
+import { Router } from '@angular/router';
+import { DataBaseService } from '../services/database-service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [DataBaseService]
 })
 export class AppComponent {
-  title = 'app';
+  title = 'ACTION FLOW';
   menus = [
     { label: 'Teste', action: this.callActions },
   ];
 
-  constructor(private router: Router, private db: AngularFirestore) {
-    db.collection("initial").doc("summary").valueChanges().subscribe((x: any) => {
+  constructor(private router: Router, private db: DataBaseService) {
+    db.getInitialActions(x => {
+      this.title = x.title;
       while (this.menus.length > 0) {
         this.menus.pop();
       }
-      x.options.forEach(y => {
+      x.initialActions.forEach(y => {
         this.menus.push({
           label: y.title,
-          action: () => { this.callActions(y.document.id); }
+          action: () => { this.callActions(y.action); }
         });
       });
     })
