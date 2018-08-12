@@ -12,12 +12,13 @@ import { AuthGuard } from './authentication/auth-guard';
 })
 export class AppComponent {
   title = 'ACTION FLOW';
-  menus = new Array<{ label: string, action: () => void }>();
+  private typesGlossaryMenu = { label: 'O que é cada tipo de ação?', action: () => { this.callTypesMenu(); } };
+  menus = [ this.typesGlossaryMenu ];
 
   constructor(private router: Router, private db: DataBaseService) {
     db.subscribeInitialActions(x => {
       this.title = x.title;
-      this.menus.length = 0;
+      this.menus.length = 1;
       x.initialActions.forEach(y => {
         this.menus.push({
           label: y.title,
@@ -25,6 +26,10 @@ export class AppComponent {
         });
       });
     });
+  }
+
+  callTypesMenu() {
+    this.router.navigate(['/types-glossary']);
   }
 
   callActions(doc: string) {

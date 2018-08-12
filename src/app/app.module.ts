@@ -10,13 +10,15 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ActionNavigationComponent } from './action-navigation/action-navigation.component';
 import { environment } from '../environments/environment';
 import { DefaultPageComponent } from './default-page/default-page.component';
+import { TypesGlossaryComponent } from './types-glossary/types-glossary.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ActionNavigationComponent,
-    DefaultPageComponent
+    DefaultPageComponent,
+    TypesGlossaryComponent
   ],
   imports: [
     BrowserModule,
