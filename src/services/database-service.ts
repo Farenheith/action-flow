@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { AuthGuard } from '../app/authentication/auth-guard';
 import { ItemMenu } from '../models/item-menu';
 import { FlowActionType } from '../models/flow-action-type';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class DataBaseService {
@@ -13,8 +14,7 @@ export class DataBaseService {
     private _root: AngularFirestoreDocument<Cenario>;
 
     constructor(private db: AngularFirestore) {
-        this.application = db.collection('base').doc('flows')
-        .collection('flanswers');
+        this.application = db.collection(environment.defaultApplication);
         this.cenariosNode = this.application.doc('cenario');
     }
 
@@ -22,12 +22,6 @@ export class DataBaseService {
         const config = this.application.doc('config');
         const collection = config.collection('type');
         collection.valueChanges().subscribe(observer);
-        /*config.valueChanges().subscribe((x: { typeList: Array<string> })  => {
-            const result = new Array<string>();
-            x.typeList.forEach(s => {
-                collection.valueChanges().
-            });
-        });*/
     }
 
     private getCenario() {
