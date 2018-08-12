@@ -1,0 +1,11 @@
+<thf-page-default>
+    <thf-list>
+      <thf-list-item *ngFor="let item of data; let i = index"  [t-title]="item.name"  [t-index]="i">
+        <thf-list-item-content>
+          <thf-info t-label="Descrição" [t-value]="item.description"></thf-info>
+          <br/>
+          <thf-info t-label="Encerra flow" [t-value]="item.endsFlow"></thf-info>
+        </thf-list-item-content>
+      </thf-list-item>
+    </thf-list>
+</thf-page-default>

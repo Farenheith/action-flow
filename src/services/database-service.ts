@@ -1,18 +1,33 @@
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Cenario } from '../models/cenario';
 import { MainAction } from '../models/main-action';
 import { Injectable } from '@angular/core';
 import { AuthGuard } from '../app/authentication/auth-guard';
 import { ItemMenu } from '../models/item-menu';
+import { FlowActionType } from '../models/flow-action-type';
 
 @Injectable()
 export class DataBaseService {
+    private application: AngularFirestoreCollection;
     private cenariosNode: AngularFirestoreDocument<{}>;
     private _root: AngularFirestoreDocument<Cenario>;
 
     constructor(private db: AngularFirestore) {
-        this.cenariosNode = db.collection('base').doc('flows')
-            .collection('flanswers').doc('cenario');
+        this.application = db.collection('base').doc('flows')
+        .collection('flanswers');
+        this.cenariosNode = this.application.doc('cenario');
+    }
+
+    subscribeTypes(observer: (x: Array<FlowActionType>) => void): any {
+        const config = this.application.doc('config');
+        const collection = config.collection('type');
+        collection.valueChanges().subscribe(observer);
+        /*config.valueChanges().subscribe((x: { typeList: Array<string> })  => {
+            const result = new Array<string>();
+            x.typeList.forEach(s => {
+                collection.valueChanges().
+            });
+        });*/
     }
 
     private getCenario() {
