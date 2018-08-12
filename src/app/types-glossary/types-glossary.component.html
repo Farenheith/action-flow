@@ -4,7 +4,7 @@
         <thf-list-item-content>
           <thf-info t-label="Descrição" [t-value]="item.description"></thf-info>
           <br/>
-          <thf-info t-label="Encerra flow" [t-value]="item.endsFlow"></thf-info>
+          <thf-info t-label="Encerra flow" [t-value]="item.endsFlow ? 'Sim' : 'Não'"></thf-info>
         </thf-list-item-content>
       </thf-list-item>
     </thf-list>
