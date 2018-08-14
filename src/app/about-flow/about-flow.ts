@@ -5,7 +5,7 @@ import { FlanswersGlossaryComponent } from './flanswers-glossary/flanswers-gloss
 
 export class AboutFlow {
     static menu: ThfMenuItem = {
-        label: 'Sobre FLOW',
+        label: 'Sobre FL ANSWERS',
         subItems: [
             { label: 'O que é cada tipo de ação?', link: '/types-glossary' },
             { label: 'Termos usados no FL ANSWERS', link: '/flanswers-glossary' }
