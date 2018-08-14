@@ -3,11 +3,13 @@ import { TypesGlossaryComponent } from './types-glossary/types-glossary.componen
 import { ThfModule } from '@totvs/thf-ui';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { FlanswersGlossaryComponent } from './flanswers-glossary/flanswers-glossary.component';
 
 
 @NgModule({
   declarations: [
-    TypesGlossaryComponent
+    TypesGlossaryComponent,
+    FlanswersGlossaryComponent
   ],
   imports: [
     BrowserModule,
