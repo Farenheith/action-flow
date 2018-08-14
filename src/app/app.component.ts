@@ -5,6 +5,7 @@ import { DataBaseService } from '../services/database-service';
 import { AuthGuard } from '../authentication/auth-guard';
 import { ThfMenuItem } from '../models/ThfMenuItem';
 import { About } from './about/about';
+import { AboutFlow } from './about-flow/about-flow';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,17 @@ import { About } from './about/about';
 })
 export class AppComponent {
   title = 'ACTION FLOW';
+  flowMenus = Array<ThfMenuItem>();
   menus: Array<ThfMenuItem> = [
-    About.menu
+    About.menu,
+    AboutFlow.menu,
+    { label: 'Simular fluxo', subItems: this.flowMenus}
   ];
 
   constructor(private router: Router, private db: DataBaseService) {
     db.subscribeInitialActions(x => {
       this.title = x.title;
-      this.menus.length = 1;
+      this.flowMenus.length = 0;
       x.initialActions.forEach(y => {
         this.menus.push({
           label: y.title,
