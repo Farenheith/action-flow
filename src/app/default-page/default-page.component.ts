@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListOption } from '../../models/list-option';
 import { DataBaseService } from '../../services/database-service';
-import { AuthGuard } from '../authentication/auth-guard';
+import { AuthGuard } from '../../authentication/auth-guard';
 
 @Component({
   selector: 'app-default-page',

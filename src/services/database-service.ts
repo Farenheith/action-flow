@@ -2,7 +2,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Cenario } from '../models/cenario';
 import { MainAction } from '../models/main-action';
 import { Injectable } from '@angular/core';
-import { AuthGuard } from '../app/authentication/auth-guard';
+import { AuthGuard } from '../authentication/auth-guard';
 import { ItemMenu } from '../models/item-menu';
 import { FlowActionType } from '../models/flow-action-type';
 import { environment } from '../environments/environment';
