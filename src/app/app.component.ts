@@ -22,8 +22,11 @@ export class AppComponent {
 
   constructor(private router: Router, private db: DataBaseService) {
     db.subscribeInitialActions(x => {
-      this.title = x.title;
       this.menus.length = 2;
+      if (!x || x == null) {
+        return;
+      }
+      this.title = x.title;
       const menu = { label: 'Simular fluxo', subItems: [] };
       x.initialActions.forEach(y => {
         menu.subItems.push({
