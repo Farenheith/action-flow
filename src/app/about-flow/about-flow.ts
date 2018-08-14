@@ -12,7 +12,7 @@ export class AboutFlow {
         ]
     };
 
-    static AddRoutes(routes: Routes): any {
+    static AddRoutes(routes: Routes) {
         routes.push(
             { path: 'types-glossary', component: TypesGlossaryComponent },
             { path: 'flanswers-glossary', component: FlanswersGlossaryComponent }
