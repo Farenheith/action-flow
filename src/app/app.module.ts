@@ -10,28 +10,22 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ActionNavigationComponent } from './action-navigation/action-navigation.component';
 import { environment } from '../environments/environment';
 import { DefaultPageComponent } from './default-page/default-page.component';
-import { TypesGlossaryComponent } from './types-glossary/types-glossary.component';
-import { AppGoalComponent } from './about/app-goal/app-goal.component';
-import { AppHowComponent } from './about/app-how/app-how.component';
-import { AppRegisteringComponent } from './about/app-registering/app-registering.component';
-import { AppScenariosComponent } from './about/app-scenarios/app-scenarios.component';
+import { AboutModule } from './about/about.module';
+import { AboutFlowModule } from './about-flow/about-flow.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ActionNavigationComponent,
-    DefaultPageComponent,
-    TypesGlossaryComponent,
-    AppGoalComponent,
-    AppHowComponent,
-    AppRegisteringComponent,
-    AppScenariosComponent
+    DefaultPageComponent
   ],
   imports: [
     BrowserModule,
     ThfModule,
     FormsModule,
+    AboutModule,
+    AboutFlowModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AppRoutingModule

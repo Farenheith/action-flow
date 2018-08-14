@@ -42,9 +42,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Firebase
-.firebaserc
-firebase.json
-
 # Environments
 /src/environments
