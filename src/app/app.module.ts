@@ -11,6 +11,10 @@ import { ActionNavigationComponent } from './action-navigation/action-navigation
 import { environment } from '../environments/environment';
 import { DefaultPageComponent } from './default-page/default-page.component';
 import { TypesGlossaryComponent } from './types-glossary/types-glossary.component';
+import { AppGoalComponent } from './about/app-goal/app-goal.component';
+import { AppHowComponent } from './about/app-how/app-how.component';
+import { AppRegisteringComponent } from './about/app-registering/app-registering.component';
+import { AppScenariosComponent } from './about/app-scenarios/app-scenarios.component';
 
 
 @NgModule({
@@ -18,7 +22,11 @@ import { TypesGlossaryComponent } from './types-glossary/types-glossary.componen
     AppComponent,
     ActionNavigationComponent,
     DefaultPageComponent,
-    TypesGlossaryComponent
+    TypesGlossaryComponent,
+    AppGoalComponent,
+    AppHowComponent,
+    AppRegisteringComponent,
+    AppScenariosComponent
   ],
   imports: [
     BrowserModule,

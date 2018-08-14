@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 import { DataBaseService } from '../services/database-service';
-import { AuthGuard } from './authentication/auth-guard';
+import { AuthGuard } from '../authentication/auth-guard';
+import { ThfMenuItem } from '../models/ThfMenuItem';
+import { About } from './about/about';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +14,9 @@ import { AuthGuard } from './authentication/auth-guard';
 })
 export class AppComponent {
   title = 'ACTION FLOW';
-  private typesGlossaryMenu = { label: 'O que é cada tipo de ação?', action: () => { this.callTypesMenu(); } };
-  menus = [ this.typesGlossaryMenu ];
+  menus: Array<ThfMenuItem> = [
+    About.menu
+  ];
 
   constructor(private router: Router, private db: DataBaseService) {
     db.subscribeInitialActions(x => {
@@ -28,11 +31,7 @@ export class AppComponent {
     });
   }
 
-  callTypesMenu() {
-    this.router.navigate(['/types-glossary']);
-  }
-
-  callActions(doc: string) {
+  private callActions(doc: string) {
     this.router.navigate(['/actions'], {
       queryParams: {
         id: doc
