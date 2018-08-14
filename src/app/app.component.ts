@@ -15,23 +15,23 @@ import { AboutFlow } from './about-flow/about-flow';
 })
 export class AppComponent {
   title = 'ACTION FLOW';
-  flowMenus = Array<ThfMenuItem>();
   menus: Array<ThfMenuItem> = [
     About.menu,
-    AboutFlow.menu,
-    { label: 'Simular fluxo', subItems: this.flowMenus}
+    AboutFlow.menu
   ];
 
   constructor(private router: Router, private db: DataBaseService) {
     db.subscribeInitialActions(x => {
       this.title = x.title;
-      this.flowMenus.length = 0;
+      this.menus.length = 2;
+      const menu = { label: 'Simular fluxo', subItems: [] };
       x.initialActions.forEach(y => {
-        this.menus.push({
+        menu.subItems.push({
           label: y.title,
           action: () => { this.callActions(y.id); }
         });
       });
+      this.menus.push(menu);
     });
   }
 
