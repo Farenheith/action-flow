@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataBaseService } from '../../services/database-service';
-import { FlowActionType } from '../../models/flow-action-type';
+import { DataBaseService } from '../../../services/database-service';
+import { FlowActionType } from '../../../models/flow-action-type';
 
 @Component({
   selector: 'app-types-glossary',
