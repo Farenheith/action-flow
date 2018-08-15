@@ -41,10 +41,6 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/assets/images/flowmenu.png",
-                  "with": "src/assets/images/flowmenu-fla.png"
                 }
               ]
             }
