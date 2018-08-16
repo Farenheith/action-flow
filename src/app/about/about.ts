@@ -15,10 +15,12 @@ export class About {
         ]
     };
 
-    static AddRoutes(routes: Routes): any {
-        routes.push({ path: 'app-goal', component: AppGoalComponent },
+    static AddRoutes(routes: Routes) {
+        routes.push(
+            { path: 'app-goal', component: AppGoalComponent },
             { path: 'app-how', component: AppHowComponent },
             { path: 'app-registering', component: AppRegisteringComponent },
-            { path: 'app-scenarios', component: AppScenariosComponent });
+            { path: 'app-scenarios', component: AppScenariosComponent }
+        );
     }
 }
