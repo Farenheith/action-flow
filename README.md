@@ -10,17 +10,18 @@ This project uses a Google Cloud Firestore database to get the actions data. In 
 
 ```
 export const environment = {
-  production: false,
-  application: 'path in your database to your application collection'
-  firebase: {
-    apiKey: 1your key',
-    authDomain: 'your firebase domain',
-    databaseURL: 'your database url',
-    projectId: 'your project id',
-    storageBucket: 'your store bucket',
-    messagingSenderId: 'your messagingSenderId'
-  }
-};
+    production: false,
+    application: 'path in your database to your application collection',
+    firebase: {
+      apiKey: 'your key',
+      authDomain: 'your firebase domain',
+      databaseURL: 'your database url',
+      projectId: 'your project id',
+      storageBucket: 'your store bucket',
+      messagingSenderId: 'your messagingSenderId'
+    }
+  };
+
 ```
 
 # Hot to setup firestore database
