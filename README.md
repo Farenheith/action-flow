@@ -11,7 +11,7 @@ This project uses a Google Cloud Firestore database to get the actions data. In 
 ```
 export const environment = {
     production: false,
-    application: 'path in your database to your application collection',
+    defaultApplication: 'path in your database to your application collection',
     firebase: {
       apiKey: 'your key',
       authDomain: 'your firebase domain',
